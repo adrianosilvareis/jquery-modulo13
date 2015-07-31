@@ -31,6 +31,7 @@ switch ($Action):
                 $WsUsers->setThis((object) $post);
                 $WsUsers->Execute()->insert();
                 $jSon['success'] = "Cadastro com sucesso!";
+                $jSon['result'] = "<article style='display: none' class='user_box j_register' id='{$WsUsers->Execute()->MaxFild('user_id')}'><h1> {$post['user_name']} {$post['user_lastname']} </h1><p>{$post['user_email']} (Nível {$post['user_level']})</p><a class='action edit j_edit' rel='{$WsUsers->Execute()->MaxFild('user_id')}'>Editar</a><a class='action del' rel='{$WsUsers->Execute()->MaxFild('user_id')}'>Deletar</a></article>";
             endif;
         endif;
         break;
@@ -44,7 +45,7 @@ switch ($Action):
                 $jSon['result'] .= "<article style='display: none' class='user_box' id='{$user_id}'><h1> {$user_name} {$user_lastname} </h1><p>{$user_email} (Nível {$user_level})</p><a class='action edit j_edit' rel='{$user_id}'>Editar</a><a class='action del' rel='{$user_id}'>Deletar</a></article>";
             endforeach;
         else:
-            $jSon['result'] = "<div class='trigger trigger-error'>Não existem resultados</div>";
+            $jSon['result'] = "<div style='margin: 15px 0 0 0' class='trigger trigger-error'>Não existem resultados</div>";
         endif;
         break;
     default :

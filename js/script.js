@@ -15,11 +15,11 @@ $(function () {
             type: 'POST',
             dataType: 'json',
             beforeSend: function () {
-                $('.register').find('.form_load').fadeIn();
+                $('.j_list').find('.form_load').fadeIn();
             },
             success: function (data) {
-                $(data.result).prependTo(destino.find('.j_insert'));
-                $('.trigger, article').fadeIn(400, function () {
+                $(data.result).appendTo(destino.find('.j_insert'));
+                $('.register').find('.trigger, article').fadeIn(400, function () {
                     $('.register').find('.form_load').fadeOut();
                 });
             }
@@ -50,8 +50,9 @@ $(function () {
                     form.find('.trigger-box').html('<div class="trigger trigger-success">' + resposta.success + '</div>');
                     form.find('.trigger-success').fadeIn();
                     form.find('input[class!="noclear"]').val('');
-
-
+                    
+                    $(resposta.result).appendTo($('.register').find('.j_list'));
+                    $('.j_register').fadeIn(400);
                 }
 
                 form.find('.form_load').fadeOut(500);

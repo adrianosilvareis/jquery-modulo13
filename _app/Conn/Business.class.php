@@ -86,7 +86,9 @@ abstract class Business extends Conn {
      */
     public function findAll() {
         $this->Termos = "SELECT * FROM $this->Table";
-        return $this->Busca();
+        $this->Busca();
+        $this->Result = $this->Stmt->fetchAll();
+        return $this->Result;
     }
 
     /**
@@ -95,8 +97,10 @@ abstract class Business extends Conn {
      * @return Ultimo Id do Banco
      */
     public function MaxFild($FildName) {
-        $this->Termos = "SELECT MAX({$FildName}) FROM {$this->Table}";
-        return $this->Busca();
+        $this->Termos = "SELECT MAX({$FildName}) as 'id' FROM {$this->Table}";
+        $this->Busca();
+        $this->Result = $this->Stmt->fetch()->id;
+        return $this->Result;
     }
 
     /**
@@ -109,7 +113,9 @@ abstract class Business extends Conn {
     public function Query($Termos, $Dados = null, $BindParam = null) {
         $this->Termos = "SELECT * FROM {$this->Table} WHERE " . $Termos;
         $this->BindParam = ($BindParam ? $BindParam : false);
-        return $this->Busca($Dados);
+        $this->Busca($Dados);
+        $this->Result = $this->Stmt->fetchAll();
+        return $this->Result;
     }
 
     /**
@@ -122,7 +128,9 @@ abstract class Business extends Conn {
     public function FullRead($Termos, $Dados = null, $BindParam = null) {
         $this->Termos = $Termos;
         $this->BindParam = ($BindParam ? $BindParam : false);
-        return $this->Busca($Dados);
+        $this->Busca($Dados);
+        $this->Result = $this->Stmt->fetchAll();
+        return $this->Result;
     }
 
     /**
@@ -134,8 +142,6 @@ abstract class Business extends Conn {
         $this->setFilds($Dados);
         $this->Execute($this->Termos);
         $this->Commit();
-        $this->Result = $this->Stmt->fetchAll();
-        return $this->Result;
     }
 
     protected function  Execute($Sql) {

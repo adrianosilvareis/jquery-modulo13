@@ -50,7 +50,6 @@
             </form>
 
             <div class="j_list">
-                <div class="j_insert"></div>
                 <?php
                 require './_app/Config.inc.php';
                 $WsUsers = new WsUsers();
@@ -69,9 +68,10 @@
                     endforeach;
                 endif;
                 ?>
-            </div>
+                <div class="j_insert"></div>
             <a rel="j_list" class='j_load loadmore'>Recarregar usuários</a>
             <img class="form_load" src="img/load.gif" alt="[CARREGANDO...]" title="CARREGANDO..."/>
+            </div>
         </section>
         <script src="js/jquery.js"></script>
         <script src="js/script.js"></script>
